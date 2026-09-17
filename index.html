@@ -270,9 +270,9 @@
   .team-photo-grid{display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:6px; width:100%; height:100%; border-radius:20px; overflow:hidden;}
   .team-photo-grid .team-photo{background:#fff; border:1.5px dashed #ddd4f2; display:flex; align-items:center; justify-content:center; color:#8b84a3; font-size:.72rem; text-align:center;}
   .team-photo-grid img{width:100%; height:100%; object-fit:cover; display:block;}
-  .team-split{display:grid; grid-template-columns:0.8fr 1.2fr; gap:6px; width:100%; height:100%; border-radius:20px; overflow:hidden;}
-  .team-split .team-video-cell{width:100%; height:100%; overflow:hidden;}
-  .team-split .team-video-cell video{width:100%; height:100%; object-fit:cover; display:block;}
+  .team-split{display:grid; grid-template-columns:0.8fr 1.2fr; grid-template-rows:1fr; gap:6px; width:100%; height:100%; border-radius:20px; overflow:hidden;}
+  .team-split .team-video-cell{width:100%; height:100%; overflow:hidden; background:#fff; display:flex; align-items:center; justify-content:center;}
+  .team-split .team-video-cell video{width:100%; height:100%; object-fit:contain; display:block;}
   .team-split .team-photos-col{display:grid; grid-template-rows:1fr 1fr 1fr; gap:6px; height:100%;}
   .team-split .team-photos-col img{width:100%; height:100%; object-fit:cover; display:block;}
   .ramp-content h3{font-size:1.2rem; margin-bottom:10px; font-weight:600;}
