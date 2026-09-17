@@ -534,11 +534,11 @@
 </section>
 
 <div class="chatcard-floating" id="pipelineWidget">
-  <div class="chat-head">
+  <div class="chat-head" onclick="minimizeChat()" style="cursor:pointer;">
     <img src="bento-photo.jpg" alt="" style="width:22px; height:22px; border-radius:50%; object-fit:cover; flex-shrink:0;"><span class="live"></span><span class="chat-label">Assistant</span>
     <div class="chat-controls">
-      <button class="chat-btn" aria-label="Minimize" onclick="minimizeChat()">−</button>
-      <button class="chat-btn" aria-label="Close" onclick="hideChat()">✕</button>
+      <button class="chat-btn" aria-label="Minimize" onclick="event.stopPropagation(); minimizeChat()">−</button>
+      <button class="chat-btn" aria-label="Close" onclick="event.stopPropagation(); hideChat()">✕</button>
     </div>
   </div>
   <div class="chat-body" id="chatBody">
@@ -573,6 +573,9 @@
   function showChat(){
     document.getElementById('pipelineWidget').classList.remove('chat-hidden');
     document.getElementById('chatReopen').classList.remove('show');
+  }
+  if (window.matchMedia('(max-width:520px)').matches) {
+    document.getElementById('pipelineWidget').classList.add('minimized');
   }
 </script>
 
@@ -716,7 +719,6 @@
 
 <section id="why-me">
   <div class="wrap">
-    <div class="eyebrow-purple">Why me</div>
     <h2 class="section-title">Why Me</h2>
     <p class="section-sub">The same skillset, tested under different conditions.</p>
     <div class="carousel-wrap">
