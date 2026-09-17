@@ -176,7 +176,7 @@
   .btn-ghost:hover{background:rgba(255,255,255,.08);}
 
   .chatcard-floating{
-    position:fixed; bottom:22px; right:22px; width:340px; max-height:min(520px,70vh);
+    position:fixed; bottom:22px; right:22px; width:280px; max-height:min(360px,60vh);
     background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
     color:var(--ink); display:flex; flex-direction:column; z-index:999;
   }
@@ -527,7 +527,7 @@
 
 <div class="chatcard-floating" id="pipelineWidget">
   <div class="chat-head">
-    <img src="bento-photo.jpg" alt="" style="width:22px; height:22px; border-radius:50%; object-fit:cover; flex-shrink:0;"><span class="live"></span><span class="chat-label">Locked in — Pipeline Assistant</span>
+    <img src="bento-photo.jpg" alt="" style="width:22px; height:22px; border-radius:50%; object-fit:cover; flex-shrink:0;"><span class="live"></span><span class="chat-label">Assistant</span>
     <div class="chat-controls">
       <button class="chat-btn" aria-label="Minimize" onclick="minimizeChat()">−</button>
       <button class="chat-btn" aria-label="Close" onclick="hideChat()">✕</button>
@@ -542,13 +542,12 @@
       <div class="pill-q" data-a="93% of my listings sell, and my average time on market is 28 days against a 36-day industry average, a 22% faster sales cycle than the market.">What's your win rate?</div>
       <div class="pill-q" data-a="The mechanics carry over directly: outbound cadence, full deal-cycle ownership, and closing at executive level under pressure. I'm also a licensed auctioneer: closing live, in the room, is my baseline.">Why real estate to SaaS?</div>
       <div class="pill-q" data-a="See for yourself: <a href=&quot;#proof&quot;>testimonials below</a>.">What do your clients think of you?</div>
-      <div class="pill-q" data-a="Regularly. About half of listing presentations run over Microsoft Teams for vendors based anywhere in the world, and buyer negotiations are almost always remote too, phone, FaceTime, or Teams, aside from auction day.">Ever closed a deal without meeting someone in person?</div>
     </div>
     <div class="chat-input">Try "Show me the numbers"<span class="arrow">➜</span></div>
   </div>
 </div>
 <button class="chat-reopen" id="chatReopen" onclick="showChat()">
-  <img src="bento-photo.jpg" alt="" style="width:18px; height:18px; border-radius:50%; object-fit:cover; flex-shrink:0;">Pipeline Assistant
+  <img src="bento-photo.jpg" alt="" style="width:18px; height:18px; border-radius:50%; object-fit:cover; flex-shrink:0;">Assistant
 </button>
 
 <script>
