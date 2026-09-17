@@ -209,8 +209,12 @@
   .pills{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 28px;}
   .pill-q{background:#f3effb; border:1px solid #e3daf7; padding:7px 12px; border-radius:999px; font-size:.76rem; cursor:pointer; transition:background .15s; color:var(--purple);}
   .pill-q:hover{background:#e6ddf9;}
-  .chat-input{display:flex; align-items:center; gap:8px; border:1px solid #e6e1f2; border-radius:12px; padding:10px 12px; color:#9a92b3; font-size:.8rem; margin-top:auto;}
-  .chat-input span.arrow{margin-left:auto; width:24px; height:24px; border-radius:50%; background:var(--purple); color:#fff; display:flex; align-items:center; justify-content:center; font-size:.75rem; flex-shrink:0;}
+  .chat-input-wrap{display:flex; align-items:center; gap:8px; border:1px solid #e6e1f2; border-radius:12px; padding:6px 6px 6px 12px; margin-top:auto;}
+  .chat-input-wrap:focus-within{border-color:var(--purple);}
+  input.chat-input{border:none; outline:none; flex:1; font-size:.8rem; color:var(--ink); background:transparent; font-family:inherit; padding:4px 0;}
+  input.chat-input::placeholder{color:#9a92b3;}
+  #chatTypeSend{border:none; cursor:pointer; margin-left:auto; width:24px; height:24px; border-radius:50%; background:var(--purple); color:#fff; display:flex; align-items:center; justify-content:center; font-size:.75rem; flex-shrink:0; padding:0;}
+  #chatTypeSend:hover{background:var(--purple-soft);}
 
   section{padding:80px 0;}
   .eyebrow-purple{color:var(--purple); font-weight:600; font-size:.92rem; margin-bottom:10px;}
@@ -292,9 +296,9 @@
   .team-photo-grid{display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:6px; width:100%; height:100%; border-radius:20px; overflow:hidden;}
   .team-photo-grid .team-photo{background:#fff; border:1.5px dashed #ddd4f2; display:flex; align-items:center; justify-content:center; color:#8b84a3; font-size:.72rem; text-align:center;}
   .team-photo-grid img{width:100%; height:100%; object-fit:cover; display:block;}
-  .team-split{display:grid; grid-template-columns:2.6fr 1fr; grid-template-rows:1fr; gap:0; width:100%; height:100%; border-radius:20px; overflow:hidden; min-height:0;}
-  .team-split .team-video-cell{width:100%; height:100%; overflow:hidden; background:#fff; display:flex; align-items:center; justify-content:center; min-height:0; min-width:0;}
-  .team-split .team-video-cell video{max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block;}
+  .team-split{display:grid; grid-template-columns:auto 1fr; grid-template-rows:1fr; gap:0; width:100%; height:100%; border-radius:20px; overflow:hidden; min-height:0;}
+  .team-split .team-video-cell{height:100%; overflow:hidden; min-height:0;}
+  .team-split .team-video-cell video{height:100%; width:auto; display:block;}
   .team-split .team-photos-col{display:grid; grid-template-rows:1fr 1fr 1fr; gap:0; height:100%; min-height:0; min-width:0;}
   .team-split .team-photos-col img{width:100%; height:100%; object-fit:cover; display:block; min-height:0; min-width:0;}
   .ramp-content h3{font-size:1.2rem; margin-bottom:10px; font-weight:600;}
@@ -517,10 +521,10 @@
       <a href="iliass-okaf-cv.pdf" download style="color:#c9bcf5; font-size:.85rem; font-weight:500; align-self:center;">Download CV</a>
     </div>
     <div class="video-grid">
-      <video data-src="listing-1.mp4" poster="listing-1-poster.jpg" data-group="1" muted loop playsinline preload="none"></video>
-      <video data-src="listing-2.mp4" poster="listing-2-poster.jpg" data-group="1" muted loop playsinline preload="none"></video>
-      <video data-src="listing-3.mp4" poster="listing-3-poster.jpg" data-group="1" muted loop playsinline preload="none"></video>
-      <video data-src="listing-4.mp4" poster="listing-4-poster.jpg" data-group="1" muted loop playsinline preload="none"></video>
+      <video data-src="listing-1.mp4" poster="listing-1-poster.jpg" muted loop playsinline preload="none"></video>
+      <video data-src="listing-2.mp4" poster="listing-2-poster.jpg" muted loop playsinline preload="none"></video>
+      <video data-src="listing-3.mp4" poster="listing-3-poster.jpg" muted loop playsinline preload="none"></video>
+      <video data-src="listing-4.mp4" poster="listing-4-poster.jpg" muted loop playsinline preload="none"></video>
     </div>
   </div>
 </section>
@@ -542,8 +546,12 @@
       <div class="pill-q" data-a="93% of my listings sell, and my average time on market is 28 days against a 36-day industry average, a 22% faster sales cycle than the market.">What's your win rate?</div>
       <div class="pill-q" data-a="The mechanics carry over directly: outbound cadence, full deal-cycle ownership, and closing at executive level under pressure. I'm also a licensed auctioneer: closing live, in the room, is my baseline.">Why real estate to SaaS?</div>
       <div class="pill-q" data-a="See for yourself: <a href=&quot;#proof&quot;>testimonials below</a>.">What do your clients think of you?</div>
+      <div class="pill-q" data-a="Ready to go immediately. My only current commitment is to my existing vendors, so I'd just need to tie up loose ends and make sure a colleague can take over.">What's your notice period?</div>
     </div>
-    <div class="chat-input">Try "Show me the numbers"<span class="arrow">➜</span></div>
+    <div class="chat-input-wrap">
+      <input type="text" id="chatTypeInput" class="chat-input" placeholder="Type a question…" autocomplete="off">
+      <button class="arrow" id="chatTypeSend" aria-label="Send">➜</button>
+    </div>
   </div>
 </div>
 <button class="chat-reopen" id="chatReopen" onclick="showChat()">
@@ -595,9 +603,7 @@
           <div class="source">Career-wide</div>
         </div>
         <div class="stat-card photo" style="padding:0; overflow:hidden; flex:196;">
-          <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover; display:block;">
-            <source src="bento-video.mp4" type="video/mp4">
-          </video>
+          <video data-src="bento-video.mp4" muted loop playsinline preload="none" style="width:100%; height:100%; object-fit:cover; display:block;"></video>
         </div>
       </div>
       <div class="stat-card cream card-d">
@@ -666,7 +672,7 @@
     <div class="ramp-list">
       <div class="ramp-row">
         <div class="ramp-photo has-media">
-          <video src="ramp-auction.mp4" poster="ramp-auction-poster.jpg" muted loop playsinline autoplay></video>
+          <video data-src="ramp-auction.mp4" poster="ramp-auction-poster.jpg" muted loop playsinline preload="none"></video>
         </div>
         <div class="ramp-content">
           <h3>Learn the product and the market fast</h3>
@@ -675,7 +681,7 @@
       </div>
       <div class="ramp-row">
         <div class="ramp-photo has-media">
-          <video src="ramp-presenting.mp4" poster="ramp-presenting-poster.jpg" muted loop playsinline autoplay></video>
+          <video data-src="ramp-presenting.mp4" poster="ramp-presenting-poster.jpg" muted loop playsinline preload="none"></video>
         </div>
         <div class="ramp-content">
           <h3>Presenting is almost a daily occurrence</h3>
@@ -686,7 +692,7 @@
         <div class="ramp-photo has-grid">
           <div class="team-split">
             <div class="team-video-cell">
-              <video src="team-3.mp4" poster="team-3-poster.jpg" muted loop playsinline autoplay></video>
+              <video data-src="team-3.mp4" poster="team-3-poster.jpg" muted loop playsinline preload="none"></video>
             </div>
             <div class="team-photos-col">
               <img src="team-1.JPG" alt="">
@@ -1016,6 +1022,40 @@
     });
   });
 
+  const typedQaBank = [
+    { keywords: ['notice', 'start date', 'when can you start', 'begin'], a: "Ready to go immediately. My only current commitment is to my existing vendors, so I'd just need to tie up loose ends and make sure a colleague can take over." },
+    { keywords: ['visa', 'work authorization', 'work rights', 'sponsor', 'sponsorship', 'citizen'], a: "Australian citizen, no visa or work authorization restrictions." },
+    { keywords: ['remote', 'office', 'hybrid', 'wfh', 'work from home'], a: "Happy with either remote or in-office long-term. During the ramp period specifically, I'd strongly prefer in-office or face-to-face, it makes picking up the product and the team faster." },
+    { keywords: ['leaving real estate', 'leave real estate', 'why leave', 'quitting', 'quit real estate'], a: "Same instinct behind the move into tech in general, see the <a href=\"#why-tech\">why tech, why now</a> section above." },
+    { keywords: ['interview', 'availability', 'schedule a call', 'talk this week', 'chat this week'], a: "Very flexible, reach out anytime and I'll make it work." }
+  ];
+  const chatFallback = "Good question, that one's best answered directly. <a href=\"#\" onclick=\"event.preventDefault(); document.querySelector('.cta-gold').scrollIntoView({behavior:'smooth'});\">Get in touch</a> and I'll get back to you.";
+
+  function handleTypedQuestion(){
+    const input = document.getElementById('chatTypeInput');
+    const text = input.value.trim();
+    if (!text) return;
+    const lower = text.toLowerCase();
+    const match = typedQaBank.find(entry => entry.keywords.some(k => lower.includes(k)));
+    const body = document.getElementById('chatBody');
+    const pillRow = document.getElementById('pillRow');
+    const q = document.createElement('div');
+    q.className = 'chat-row me';
+    q.innerHTML = '<div class="bubble me"></div>';
+    q.firstChild.textContent = text;
+    const a = document.createElement('div');
+    a.className = 'chat-row';
+    a.innerHTML = '<div class="bubble them">' + (match ? match.a : chatFallback) + '</div>';
+    body.insertBefore(q, pillRow);
+    body.insertBefore(a, pillRow);
+    input.value = '';
+    body.scrollTop = body.scrollHeight;
+  }
+  document.getElementById('chatTypeSend').addEventListener('click', handleTypedQuestion);
+  document.getElementById('chatTypeInput').addEventListener('keydown', (e)=>{
+    if (e.key === 'Enter') handleTypedQuestion();
+  });
+
   document.getElementById('hamBtn').addEventListener('click', ()=>{
     document.getElementById('mobileNav').classList.toggle('open');
   });
@@ -1071,6 +1111,7 @@
     const root = document.getElementById(carouselId);
     if(!root) return;
     const timers = {};
+    const demoPlayed = new Set();
     const obs = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         const id = entry.target.id;
@@ -1079,8 +1120,9 @@
         clearTimeout(timers[id+'_out']);
         if(entry.isIntersecting){
           if(userControlledCards.has(id)) return;
+          if(demoPlayed.has(id)) return;
           timers[id+'_in'] = setTimeout(()=>{
-            if(!userControlledCards.has(id)){ inner.classList.add('flip-anim'); entry.target.classList.add('flipped'); }
+            if(!userControlledCards.has(id)){ demoPlayed.add(id); inner.classList.add('flip-anim'); entry.target.classList.add('flipped'); }
           }, 450);
           timers[id+'_out'] = setTimeout(()=>{
             if(!userControlledCards.has(id)){ inner.classList.add('flip-anim'); entry.target.classList.remove('flipped'); }
@@ -1185,11 +1227,6 @@
   initCarousel('testimonialCarousel', 'testimonialDots');
 
   var lazyVideos = Array.from(document.querySelectorAll('video[data-src]'));
-  var groupIds = [];
-  lazyVideos.forEach(function(v) {
-    var g = v.dataset.group || '0';
-    if (groupIds.indexOf(g) === -1) groupIds.push(g);
-  });
   function loadVideo(v) {
     return new Promise(function(resolve) {
       v.addEventListener('canplay', function onReady() {
@@ -1201,17 +1238,13 @@
       v.load();
     });
   }
-  function loadGroup(groupId) {
-    var groupVideos = lazyVideos.filter(function(v) { return (v.dataset.group || '0') === groupId; });
-    return Promise.all(groupVideos.map(loadVideo));
-  }
-  function loadGroupsInOrder(i) {
-    if (i >= groupIds.length) return;
-    loadGroup(groupIds[i]).then(function() {
-      loadGroupsInOrder(i + 1);
+  function loadVideosInOrder(i) {
+    if (i >= lazyVideos.length) return;
+    loadVideo(lazyVideos[i]).then(function() {
+      loadVideosInOrder(i + 1);
     });
   }
-  loadGroupsInOrder(0);
+  loadVideosInOrder(0);
 </script>
 
 <div class="cv-modal" id="cvModal">
