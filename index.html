@@ -1242,13 +1242,7 @@
       v.load();
     });
   }
-  function loadVideosInOrder(i) {
-    if (i >= lazyVideos.length) return;
-    loadVideo(lazyVideos[i]).then(function() {
-      loadVideosInOrder(i + 1);
-    });
-  }
-  loadVideosInOrder(0);
+  lazyVideos.forEach(loadVideo);
 </script>
 
 <div class="cv-modal" id="cvModal">
