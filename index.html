@@ -93,8 +93,9 @@
     background:linear-gradient(135deg,var(--gold),var(--pink));
     display:inline-flex; align-items:center; justify-content:center;
     font-family:'Montserrat',sans-serif; font-size:.75rem; color:var(--navy); font-weight:700;
-    flex-shrink:0;
+    flex-shrink:0; overflow:hidden;
   }
+  .brand .dot img{width:100%; height:100%; object-fit:cover; display:block;}
   nav.desktop-nav{display:flex; gap:6px;}
   nav a{color:#e6e1f7; padding:9px 15px; border-radius:999px; font-size:.92rem; font-weight:500; transition:background .2s, color .2s;}
   nav a:hover{background:rgba(255,255,255,.08); color:#fff;}
@@ -157,7 +158,7 @@
   .hero-heading{grid-area:heading;}
   .story-wrap{grid-area:story;}
   .hero-ctas{grid-area:ctas; align-self:start;}
-  .chatcard{grid-area:chat; align-self:stretch;}
+  .video-grid{grid-area:chat; align-self:stretch;}
   .eyebrow{color:#c9bcf5; font-size:.85rem; letter-spacing:.02em; margin-bottom:14px; font-weight:600;}
   .hero h1{font-size:2.9rem; line-height:1.12; font-weight:600; margin-bottom:22px;}
   .hero p.lede{font-size:1.1rem; color:#d9d3ee; max-width:520px; margin-bottom:30px;}
@@ -174,9 +175,30 @@
   }
   .btn-ghost:hover{background:rgba(255,255,255,.08);}
 
-  .chatcard{background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 30px 60px -20px rgba(0,0,0,.5); color:var(--ink); display:flex; flex-direction:column; height:100%;}
+  .chatcard-floating{
+    position:fixed; bottom:22px; right:22px; width:340px; max-height:min(520px,70vh);
+    background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
+    color:var(--ink); display:flex; flex-direction:column; z-index:999;
+  }
+  .chatcard-floating.minimized .chat-body{display:none;}
+  .chatcard-floating.chat-hidden{display:none;}
   .chat-head{background:linear-gradient(90deg,var(--purple),var(--purple-soft)); color:#fff; padding:13px 18px; font-size:.88rem; font-weight:600; display:flex; align-items:center; gap:8px;}
   .chat-head .live{width:7px;height:7px;border-radius:50%;background:#5CE49B;flex-shrink:0;}
+  .chat-head .chat-label{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .chat-controls{display:flex; gap:6px; margin-left:auto; flex-shrink:0;}
+  .chat-btn{background:rgba(255,255,255,.16); border:none; color:#fff; width:22px; height:22px; border-radius:6px; cursor:pointer; font-size:.85rem; line-height:1; display:flex; align-items:center; justify-content:center; padding:0;}
+  .chat-btn:hover{background:rgba(255,255,255,.3);}
+  .chat-reopen{
+    position:fixed; bottom:22px; right:22px; background:var(--purple); color:#fff; border:none;
+    padding:13px 20px; border-radius:999px; font-weight:600; font-size:.85rem;
+    box-shadow:0 20px 40px -15px rgba(0,0,0,.5); cursor:pointer; z-index:999;
+    display:none; align-items:center; gap:8px;
+  }
+  .chat-reopen.show{display:flex;}
+  @media (max-width:520px){
+    .chatcard-floating{left:14px; right:14px; bottom:14px; width:auto; max-height:65vh;}
+    .chat-reopen{right:14px; bottom:14px;}
+  }
   .chat-body{padding:18px; font-size:.87rem; display:flex; flex-direction:column; flex:1; min-height:0; overflow-y:auto;}
   .chat-row{display:flex; margin-bottom:18px;}
   .chat-row.me{justify-content:flex-end;}
@@ -195,17 +217,17 @@
   .section-title{font-size:2rem; font-weight:600; max-width:760px; margin-bottom:10px;}
   .section-sub{font-size:1.1rem; color:#4a4266; margin-bottom:40px; max-width:640px;}
 
-  /* Listing video grid */
-  .listing-grid-section{padding:56px 0;}
+  /* Listing video grid (now lives in hero) */
   .video-grid{
+    grid-area:chat; align-self:stretch;
     display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:6px;
-    aspect-ratio:16/10; max-height:520px; border-radius:18px; overflow:hidden;
+    height:100%; min-height:260px; border-radius:18px; overflow:hidden;
   }
   .video-grid video{width:100%; height:100%; object-fit:cover; display:block; background:#eee;}
 
   /* Problem section */
   .problem{padding:76px 0;}
-  .problem .wrap{display:grid; grid-template-columns:.85fr 1.15fr; gap:56px; align-items:center;}
+  #why-tech .wrap{display:block;}
   .problem-visual{
     background:linear-gradient(160deg,#FFC145,#FF6F59 60%,#2A6BF2);
     border-radius:22px; aspect-ratio:1/1.05; display:flex; align-items:center; justify-content:center;
@@ -270,10 +292,10 @@
   .team-photo-grid{display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:6px; width:100%; height:100%; border-radius:20px; overflow:hidden;}
   .team-photo-grid .team-photo{background:#fff; border:1.5px dashed #ddd4f2; display:flex; align-items:center; justify-content:center; color:#8b84a3; font-size:.72rem; text-align:center;}
   .team-photo-grid img{width:100%; height:100%; object-fit:cover; display:block;}
-  .team-split{display:grid; grid-template-columns:2.6fr 1fr; grid-template-rows:1fr; gap:2px; width:100%; height:100%; border-radius:20px; overflow:hidden; min-height:0;}
+  .team-split{display:grid; grid-template-columns:2.6fr 1fr; grid-template-rows:1fr; gap:0; width:100%; height:100%; border-radius:20px; overflow:hidden; min-height:0;}
   .team-split .team-video-cell{width:100%; height:100%; overflow:hidden; background:#fff; display:flex; align-items:center; justify-content:center; min-height:0; min-width:0;}
   .team-split .team-video-cell video{max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block;}
-  .team-split .team-photos-col{display:grid; grid-template-rows:1fr 1fr 1fr; gap:2px; height:100%; min-height:0; min-width:0;}
+  .team-split .team-photos-col{display:grid; grid-template-rows:1fr 1fr 1fr; gap:0; height:100%; min-height:0; min-width:0;}
   .team-split .team-photos-col img{width:100%; height:100%; object-fit:cover; display:block; min-height:0; min-width:0;}
   .ramp-content h3{font-size:1.2rem; margin-bottom:10px; font-weight:600;}
   .ramp-content p{color:#4a4266; font-size:.96rem;}
@@ -385,12 +407,10 @@
       grid-template-columns:1fr;
       grid-template-areas: "heading" "story" "chat" "ctas";
     }
-    .chatcard{height:auto;}
     .hero h1{font-size:2.1rem;}
     .stats-grid{flex-wrap:wrap;}
     .stats-grid > .stat-card, .stats-grid > .stats-col{flex-basis:calc(50% - 16px);}
     .stat-card{height:auto; min-height:180px;}
-    .problem .wrap{grid-template-columns:1fr;}
     .problem-visual{aspect-ratio:16/9; max-width:340px;}
     .feature-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr 1fr;}
@@ -441,7 +461,7 @@
 
 <header>
   <div class="wrap">
-    <div class="brand"><span class="dot">IO</span> Iliass Okaf</div>
+    <div class="brand"><span class="dot"><img src="bento-photo.jpg" alt=""></span> Iliass Okaf</div>
     <nav class="desktop-nav">
       <a href="#track-record">Track Record</a>
       <a href="#beyond-numbers">The Ramp</a>
@@ -496,27 +516,6 @@
       <a class="btn-ghost" href="iliass-okaf-cv.pdf" onclick="event.preventDefault(); openCvModal();">View the Full CV (PDF)</a>
       <a href="iliass-okaf-cv.pdf" download style="color:#c9bcf5; font-size:.85rem; font-weight:500; align-self:center;">Download CV</a>
     </div>
-    <div class="chatcard">
-      <div class="chat-head"><img src="profile-photo.jpg" alt="" style="width:22px; height:22px; border-radius:50%; object-fit:cover; flex-shrink:0;"><span class="live"></span>Iliass — Pipeline Assistant</div>
-      <div class="chat-body" id="chatBody">
-        <div class="chat-row"><div class="bubble them">Hi there, 👋 Ask me anything about the track record.</div></div>
-        <div class="pills" id="pillRow">
-          <div class="pill-q" data-a="Sales volume grew from $17.9M in 2024 to $42.6M in 2025, up ~138%, with $21.0M already closed year-to-date in 2026.">What's your YoY growth?</div>
-          <div class="pill-q" data-a="Three channels: identifying and expanding targets within a live database, building relationships with the industry players who influence a deal (brokers, conveyancers, other agents), and referrals from past clients. Direct outreach (calls, in-person touchpoints) is one tool inside that system. I grew the database from zero to 900+ over 3 years.">How did you build your pipeline?</div>
-          <div class="pill-q" data-a="Mostly gummy bears and cheeseburgers. At volumes that shouldn't be physically possible.">What keeps you performing at the top of your game?</div>
-          <div class="pill-q" data-a="93% of my listings sell, and my average time on market is 28 days against a 36-day industry average, a 22% faster sales cycle than the market.">What's your win rate?</div>
-          <div class="pill-q" data-a="The mechanics carry over directly: outbound cadence, full deal-cycle ownership, and closing at executive level under pressure. I'm also a licensed auctioneer: closing live, in the room, is my baseline.">Why real estate to SaaS?</div>
-          <div class="pill-q" data-a="See for yourself: <a href=&quot;#proof&quot;>testimonials below</a>.">What do your clients think of you?</div>
-          <div class="pill-q" data-a="Regularly. About half of listing presentations run over Microsoft Teams for vendors based anywhere in the world, and buyer negotiations are almost always remote too, phone, FaceTime, or Teams, aside from auction day.">Ever closed a deal without meeting someone in person?</div>
-        </div>
-        <div class="chat-input">Try "Show me the numbers"<span class="arrow">➜</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="listing-grid-section">
-  <div class="wrap">
     <div class="video-grid">
       <video data-src="listing-1.mp4" poster="listing-1-poster.jpg" data-group="1" muted loop playsinline preload="none"></video>
       <video data-src="listing-2.mp4" poster="listing-2-poster.jpg" data-group="1" muted loop playsinline preload="none"></video>
@@ -525,6 +524,46 @@
     </div>
   </div>
 </section>
+
+<div class="chatcard-floating" id="pipelineWidget">
+  <div class="chat-head">
+    <img src="bento-photo.jpg" alt="" style="width:22px; height:22px; border-radius:50%; object-fit:cover; flex-shrink:0;"><span class="live"></span><span class="chat-label">Locked in — Pipeline Assistant</span>
+    <div class="chat-controls">
+      <button class="chat-btn" aria-label="Minimize" onclick="minimizeChat()">−</button>
+      <button class="chat-btn" aria-label="Close" onclick="hideChat()">✕</button>
+    </div>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="chat-row"><div class="bubble them">Hi there, 👋 Ask me anything about the track record.</div></div>
+    <div class="pills" id="pillRow">
+      <div class="pill-q" data-a="Sales volume grew from $17.9M in 2024 to $42.6M in 2025, up ~138%, with $21.0M already closed year-to-date in 2026.">What's your YoY growth?</div>
+      <div class="pill-q" data-a="Three channels: identifying and expanding targets within a live database, building relationships with the industry players who influence a deal (brokers, conveyancers, other agents), and referrals from past clients. Direct outreach (calls, in-person touchpoints) is one tool inside that system. I grew the database from zero to 900+ over 3 years.">How did you build your pipeline?</div>
+      <div class="pill-q" data-a="Mostly gummy bears and cheeseburgers. At volumes that shouldn't be physically possible.">What keeps you performing at the top of your game?</div>
+      <div class="pill-q" data-a="93% of my listings sell, and my average time on market is 28 days against a 36-day industry average, a 22% faster sales cycle than the market.">What's your win rate?</div>
+      <div class="pill-q" data-a="The mechanics carry over directly: outbound cadence, full deal-cycle ownership, and closing at executive level under pressure. I'm also a licensed auctioneer: closing live, in the room, is my baseline.">Why real estate to SaaS?</div>
+      <div class="pill-q" data-a="See for yourself: <a href=&quot;#proof&quot;>testimonials below</a>.">What do your clients think of you?</div>
+      <div class="pill-q" data-a="Regularly. About half of listing presentations run over Microsoft Teams for vendors based anywhere in the world, and buyer negotiations are almost always remote too, phone, FaceTime, or Teams, aside from auction day.">Ever closed a deal without meeting someone in person?</div>
+    </div>
+    <div class="chat-input">Try "Show me the numbers"<span class="arrow">➜</span></div>
+  </div>
+</div>
+<button class="chat-reopen" id="chatReopen" onclick="showChat()">
+  <img src="bento-photo.jpg" alt="" style="width:18px; height:18px; border-radius:50%; object-fit:cover; flex-shrink:0;">Pipeline Assistant
+</button>
+
+<script>
+  function minimizeChat(){
+    document.getElementById('pipelineWidget').classList.toggle('minimized');
+  }
+  function hideChat(){
+    document.getElementById('pipelineWidget').classList.add('chat-hidden');
+    document.getElementById('chatReopen').classList.add('show');
+  }
+  function showChat(){
+    document.getElementById('pipelineWidget').classList.remove('chat-hidden');
+    document.getElementById('chatReopen').classList.remove('show');
+  }
+</script>
 
 <section id="track-record">
   <div class="wrap">
@@ -900,7 +939,7 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <div class="brand" style="margin-bottom:14px;"><span class="dot">IO</span> Iliass Okaf</div>
+        <div class="brand" style="margin-bottom:14px;"><span class="dot"><img src="bento-photo.jpg" alt=""></span> Iliass Okaf</div>
         <p style="max-width:260px; color:#8b84a3; font-size:.88rem;">Open to AE/AM opportunities.</p>
       </div>
       <div>
